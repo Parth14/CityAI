@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import os
 
@@ -6,6 +7,22 @@ app = FastAPI(
     title="Activate BrowserUse API",
     description="Simple API to manage activation state",
     version="1.0.0"
+)
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:3001", 
+        "http://localhost:8000",
+        "http://localhost:8080",
+        "https://your-frontend-domain.com",  # Add your production domain here
+        "*"  # Allow all origins - remove this in production for security
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Simple in-memory state (starts at 0)

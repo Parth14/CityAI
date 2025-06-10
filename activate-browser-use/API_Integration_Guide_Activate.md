@@ -501,3 +501,20 @@ curl -X POST https://activate-browser-use.onrender.com/deactivate
 # Health check
 curl https://activate-browser-use.onrender.com/health
 ```
+
+```powershell
+# Get the simple value (0 or 1)
+Invoke-RestMethod -Uri "https://activate-browser-use.onrender.com/value" -Method Get
+
+# Get detailed status
+Invoke-RestMethod -Uri "https://activate-browser-use.onrender.com/status" -Method Get
+
+# Activate (set to 1)
+Invoke-RestMethod -Uri "https://activate-browser-use.onrender.com/activate" -Method Post
+
+# Deactivate (set to 0)
+Invoke-RestMethod -Uri "https://activate-browser-use.onrender.com/deactivate" -Method Post
+
+# Health check
+Invoke-RestMethod -Uri "https://activate-browser-use.onrender.com/health" -Method Get
+```
