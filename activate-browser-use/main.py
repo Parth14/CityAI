@@ -31,6 +31,11 @@ async def get_status():
     status = "inactive" if activation_state["value"] == 0 else "active"
     return StatusResponse(value=activation_state["value"], status=status)
 
+@app.get("/value")
+async def get_value():
+    """Get just the activation value (0 or 1)"""
+    return activation_state["value"]
+
 @app.post("/activate", response_model=ActivationResponse)
 async def activate():
     """Set activation state to 1"""

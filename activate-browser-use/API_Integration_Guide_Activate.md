@@ -8,7 +8,8 @@ This guide shows how to integrate with the Activate Browser Use API from Python 
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/status` | Get current activation status |
+| GET | `/value` | Get just the activation value (0 or 1) |
+| GET | `/status` | Get current activation status (detailed) |
 | POST | `/activate` | Set activation state to 1 |
 | POST | `/deactivate` | Set activation state to 0 |
 | GET | `/health` | Health check |
@@ -31,6 +32,16 @@ BASE_URL = "https://activate-browser-use.onrender.com"
 class BrowserUseActivator:
     def __init__(self, base_url=BASE_URL):
         self.base_url = base_url
+    
+    def get_value(self):
+        """Get just the activation value (0 or 1)"""
+        try:
+            response = requests.get(f"{self.base_url}/value")
+            response.raise_for_status()
+            return response.json()  # Returns just 0 or 1
+        except requests.exceptions.RequestException as e:
+            print(f"Error getting value: {e}")
+            return None
     
     def get_status(self):
         """Get current activation status"""
@@ -70,9 +81,13 @@ class BrowserUseActivator:
 # Example usage
 activator = BrowserUseActivator()
 
-# Check current status
+# Get just the value (0 or 1)
+value = activator.get_value()
+print(f"Current value: {value}")  # Output: 0 or 1
+
+# Get detailed status
 status = activator.get_status()
-print(f"Current status: {status}")
+print(f"Detailed status: {status}")  # Output: {"value": 0, "status": "inactive"}
 
 # Activate the service
 result = activator.activate()
@@ -98,6 +113,16 @@ BASE_URL = "https://activate-browser-use.onrender.com"
 class AsyncBrowserUseActivator:
     def __init__(self, base_url=BASE_URL):
         self.base_url = base_url
+    
+    async def get_value(self, session):
+        """Get just the activation value (0 or 1)"""
+        try:
+            async with session.get(f"{self.base_url}/value") as response:
+                response.raise_for_status()
+                return await response.json()
+        except aiohttp.ClientError as e:
+            print(f"Error getting value: {e}")
+            return None
     
     async def get_status(self, session):
         """Get current activation status"""
@@ -181,6 +206,31 @@ class BrowserUseActivator {
 
   constructor(baseUrl: string = BASE_URL) {
     this.baseUrl = baseUrl;
+  }
+
+  async getValue(): Promise<number | null> {
+    try {
+      const response: AxiosResponse<number> = await axios.get(
+        `${this.baseUrl}/value`
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Error getting value:', error);
+      return null;
+    }
+  }
+
+  async getValue(): Promise<number | null> {
+    try {
+      const response = await fetch(`${this.baseUrl}/value`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Error getting value:', error);
+      return null;
+    }
   }
 
   async getStatus(): Promise<StatusResponse | null> {
@@ -436,7 +486,10 @@ monitor.startMonitoring();
 You can test the API directly with curl:
 
 ```bash
-# Check status
+# Get just the value (0 or 1)
+curl https://activate-browser-use.onrender.com/value
+
+# Get detailed status
 curl https://activate-browser-use.onrender.com/status
 
 # Activate
