@@ -6,8 +6,12 @@ def worker_service():
     activator = BrowserUseActivator()
     
     while True:
-        if activator.is_active():
-            print("Service is active, performing work...")
+        if activator.is_rescheduling():
+            print("Service is rescheduling, performing work...")
+            # Do your work here
+            time.sleep(5)
+        elif activator.is_rerouting():
+            print("Service is rerouting, performing work...")
             # Do your work here
             time.sleep(5)
         else:

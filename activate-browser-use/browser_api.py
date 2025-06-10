@@ -8,7 +8,7 @@ class BrowserUseActivator:
         self.base_url = base_url
     
     def get_value(self):
-        """Get just the activation value (0 or 1)"""
+        """Get just the activation value (0 or 1 or 2)"""
         try:
             response = requests.get(f"{self.base_url}/value")
             response.raise_for_status()
@@ -47,7 +47,12 @@ class BrowserUseActivator:
             print(f"Error deactivating: {e}")
             return None
     
-    def is_active(self):
-        """Check if service is currently active"""
+    def is_rescheduling(self):
+        """Check if service is currently rescheduling"""
         status = self.get_status()
         return status and status.get("value") == 1
+    
+    def is_rerouting(self):
+        """Check if service is currently rerouting"""
+        status = self.get_status()
+        return status and status.get("value") == 2

@@ -53,11 +53,17 @@ async def get_value():
     """Get just the activation value (0 or 1)"""
     return activation_state["value"]
 
-@app.post("/activate", response_model=ActivationResponse)
+@app.post("/reschedule", response_model=ActivationResponse)
 async def activate():
     """Set activation state to 1"""
     activation_state["value"] = 1
-    return ActivationResponse(value=1, message="Service activated successfully")
+    return ActivationResponse(value=1, message="Service activated successfully (rescheduled)")
+
+@app.post("/reroute", response_model=ActivationResponse)
+async def activate():
+    """Set activation state to 2"""
+    activation_state["value"] = 2
+    return ActivationResponse(value=2, message="Service activated successfully (rerouted)")
 
 @app.post("/deactivate", response_model=ActivationResponse)
 async def deactivate():
