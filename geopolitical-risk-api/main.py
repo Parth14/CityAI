@@ -50,6 +50,7 @@ llm_service = LLMService()
 port_service = PortService()
 news_service = NewsService()
 
+@app.head("/healthz")
 @app.get("/healthz")
 async def healthz():
     return {"status": "ok"}

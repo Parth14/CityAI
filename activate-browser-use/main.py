@@ -36,6 +36,7 @@ class ActivationResponse(BaseModel):
     value: int
     message: str
 
+@app.head("/healthz")
 @app.get("/healthz")
 async def healthz():
     return {"status": "ok"}

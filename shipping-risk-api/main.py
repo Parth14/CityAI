@@ -48,6 +48,7 @@ weather_service = WeatherService()
 llm_service = LLMService()
 port_service = PortService()
 
+@app.head("/healthz")
 @app.get("/healthz")
 async def healthz():
     return {"status": "ok"}
