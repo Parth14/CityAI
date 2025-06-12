@@ -34,6 +34,7 @@ class PortService:
             "port of new orleans": {"lat": 29.9511, "lon": -90.0715, "country": "United States", "code": "USMSY"},
             "port of baltimore": {"lat": 39.2904, "lon": -76.6122, "country": "United States", "code": "USBAL"},
             "port of norfolk": {"lat": 36.8468, "lon": -76.2951, "country": "United States", "code": "USNFK"},
+            "port of san francisco": {"lat": 37.7749, "lon": -122.4194, "country": "United States", "code": "USSFO"},
             
             # North America - Canada
             "port of vancouver": {"lat": 49.2827, "lon": -123.1207, "country": "Canada", "code": "CAVAN"},

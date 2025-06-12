@@ -78,6 +78,11 @@ class PortService:
                 "latitude": 29.7604, "longitude": -95.3698, "region": "North America",
                 "security_level": "High", "labor_stability": "Good", "infrastructure": "Excellent"
             },
+            "San Francisco": {
+                "name": "Port of San Francisco", "country": "United States", "code": "USSFO",
+                "latitude": 37.7749, "longitude": -122.4194, "region": "North America",
+                "security_level": "High", "labor_stability": "Good", "infrastructure": "Very Good"
+            },
             "New Orleans": {
                 "name": "Port of New Orleans", "country": "United States", "code": "USMSY",
                 "latitude": 29.9511, "longitude": -90.0715, "region": "North America",
